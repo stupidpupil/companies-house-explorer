@@ -237,7 +237,8 @@ var add_psc_to_cy_for_company = function(company_id, extra_data = {}){
 				psc?.identification?.country_registered == "England" |
 				psc?.identification?.country_registered == "Wales" |
 				psc?.identification?.country_registered == "Scotland" |
-				psc?.identification?.country_registered == "Uk"
+				psc?.identification?.country_registered == "Uk" |
+				psc?.identification?.country_registered == "United Kingdom"
 				){
 				var office_company_id = fix_company_id(psc.identification.registration_number);
 				add_company_to_cy_from_id(office_company_id).done(
