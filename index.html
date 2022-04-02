@@ -1,0 +1,63 @@
+
+<!doctype html>
+<html lang=en>
+  <head>
+
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+      crossorigin="anonymous"></script>
+
+
+     <!-- Cytoscope -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.21.0/cytoscape.min.js" integrity="sha512-6NNH8uUbdENB10r5FH/4DZviHTQ44GtZ+c+fwSiWM4GekjajHkYanpH0+jWt3meFll/HHWAcxKLcMpSAXuT/Dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <script src="js/companies_house.js"></script>
+    <script src="js/helpers.js"></script>
+    <script src="js/cytoscape_manager.js"></script>
+
+    <meta charset=utf-8>
+    <title>Companies House Explorer</title>
+  </head>
+  <body>
+
+  	<div id="cy" style="height:800px;width:1024px; border:1px solid black; float:left;">
+
+  	</div>
+
+
+
+  	<div>
+
+  		<h1> Add Company by Id</h1>
+  		<p>Must be a valid registration number</p>
+
+  		<input id="new_registration_number" value="10723597"></input>
+  		<button id="add_new_company">Add New Company</button>
+
+  		<br/>
+
+    	<button id="relayout">Relayout Graph</button>
+
+  		<h1>Selection</h1>
+  		<p id="selection_name">Selection Name</p>
+  		<p><a id="selection_link" href="", target="_blank">Link</a></p>
+
+
+  		<button id="add_pscs" disabled>Add Persons with Significant Control</button>
+  		<button id="add_officers" disabled>Add Officers</button>
+  		<button id="add_address" disabled>Add Address</button>
+
+  		<br/>
+  		<br/>
+  		<br/>
+
+  		<button id="remove_node">Remove</button>
+
+  	</div>
+
+  </body>
+
+</html>
