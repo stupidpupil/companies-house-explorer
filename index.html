@@ -23,13 +23,11 @@
   </head>
   <body>
 
-  	<div id="cy" style="height:800px;width:1024px; border:1px solid black; float:left;">
+  	<div id="cy" style="height: 100vh; width: calc(100vw - 30em); position: fixed; top:0; left:0;">
 
   	</div>
 
-
-
-  	<div>
+  	<div style="height: 100vh; width: 30em; position: fixed; top:0; right:0; background-color: #eee; overflow: scroll;">
 
   		<h1> Add Company by Id</h1>
   		<p>Must be a valid registration number</p>
@@ -46,13 +44,18 @@
   		<p><a id="selection_link" href="", target="_blank">Link</a></p>
 
 
-  		<button id="add_pscs" disabled>Add Persons with Significant Control</button>
-  		<button id="add_officers" disabled>Add Officers</button>
+  		<button id="add_pscs" disabled>Add Persons with Significant Control</button><br>
+  		<button id="add_officers" disabled>Add Officers</button><br>
   		<button id="add_address" disabled>Add Address</button>
 
-  		<br/>
-  		<br/>
-  		<br/>
+
+  		<dl id="selection_info_dictionary">
+
+  		</dl>
+
+  		<br>
+  		<br>
+  		<br>
 
   		<button id="remove_node">Remove</button>
 

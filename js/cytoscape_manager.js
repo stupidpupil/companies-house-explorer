@@ -79,6 +79,7 @@ $(function(){
 
 
 	$("#add_new_company").click(function(){
+		cy.$("*").unselect();
 		var company_id = $("#new_registration_number").val();
 		add_company_to_cy_from_id(company_id, {marked_as_important:true, selected:true});
 	});
@@ -126,7 +127,24 @@ $(function(){
 
 
 		$("#selection_name").text(cy_selection_data.pretty_name);
-		$("#selection_link").attr('href', "https://find-and-update.company-information.service.gov.uk/" + cy_selection_data.link);
+
+		if(cy_selection_data?.link){
+			$("#selection_link").attr('href', cy_selection_data.link);
+			$("#selection_link").text('Link');
+		}else{
+			$("#selection_link").text('');
+		}
+
+		$("#selection_info_dictionary").empty();
+
+		Object.entries(cy_selection_data).forEach(e => {
+			$("#selection_info_dictionary").append(
+				"<dt>" + JSON.stringify(e[0], null, 1) + "</dt>" +
+				"<dd>" + JSON.stringify(e[1], null, 1) + "</dd>"
+			)
+		});
+
+
 
 		if(cy_selection_data?.company_id){
 			$("#add_officers").prop('disabled', false);
@@ -149,7 +167,7 @@ var add_company_to_cy_from_id = function(company_id, extra_data = {}) {
 		data.company_id = company_id;
 		data.id = "company_" + company_id;
 		data.cy_type = 'uk-company';
-		data.link = data.links.self;
+		data.link = "https://find-and-update.company-information.service.gov.uk/" + data.links.self;
 		data.address = data.registered_office_address;
 		data.address_type = 'registered_office';
 		data = {...data, ...extra_data};
@@ -195,7 +213,6 @@ var add_officers_to_cy_for_company = function(company_id, extra_data = {}){
 			}else{
 				officer.pretty_name = officer.name;
 				officer.id = "person_"+officer.name+officer?.date_of_birth?.month+officer?.date_of_birth?.year;
-				officer.link = officer.links.officer.appointments;
 				data_for_cy.push({data: officer})
 				
 				edge.source = officer.id;
