@@ -35,7 +35,7 @@ $(function(){
 		    {
 		    	selector: "node[marked_as_important]",
 		    	style: {
-		    		'border-width' : 1,
+		    		'border-width' : 3,
 		    		'border-color' : 'red'
 		    	}
 
