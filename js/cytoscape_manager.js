@@ -202,7 +202,18 @@ var add_officers_to_cy_for_company = function(company_id, extra_data = {}){
 				return;
 			}
 
-			if(officer?.identification?.identification_type == "uk-limited-company"){
+			if(officer?.identification?.identification_type == "uk-limited-company" |
+				officer?.identification?.place_registered == "Companies House" |
+				officer?.identification?.place_registered == "Uk Register Of Companies" |
+				officer?.identification?.place_registered == "England And Wales Company Registry" |
+				officer?.identification?.place_registered?.toUpperCase() == "United Kingdom"?.toUpperCase() |
+				officer?.identification?.country_registered?.toUpperCase() == "England And Wales"?.toUpperCase() |
+				officer?.identification?.country_registered?.toUpperCase() == "England"?.toUpperCase() |
+				officer?.identification?.country_registered?.toUpperCase() == "Wales"?.toUpperCase() |
+				officer?.identification?.country_registered?.toUpperCase() == "Scotland"?.toUpperCase() |
+				officer?.identification?.country_registered?.toUpperCase() == "Uk"?.toUpperCase() |
+				officer?.identification?.country_registered?.toUpperCase() == "United Kingdom"?.toUpperCase()
+				){
 				var office_company_id = fix_company_id(officer.identification.registration_number);
 				add_company_to_cy_from_id(office_company_id).done(
 					function(){
@@ -213,6 +224,9 @@ var add_officers_to_cy_for_company = function(company_id, extra_data = {}){
 			}else{
 				officer.pretty_name = officer.name;
 				officer.id = "person_"+officer.name+officer?.date_of_birth?.month+officer?.date_of_birth?.year;
+
+				officer.link = "https://find-and-update.company-information.service.gov.uk/" + officer.links.officer.appointments;
+
 				data_for_cy.push({data: officer})
 				
 				edge.source = officer.id;
@@ -250,12 +264,13 @@ var add_psc_to_cy_for_company = function(company_id, extra_data = {}){
 				psc?.identification?.place_registered == "Companies House" |
 				psc?.identification?.place_registered == "Uk Register Of Companies" |
 				psc?.identification?.place_registered == "England And Wales Company Registry" |
-				psc?.identification?.country_registered == "England And Wales" |
-				psc?.identification?.country_registered == "England" |
-				psc?.identification?.country_registered == "Wales" |
-				psc?.identification?.country_registered == "Scotland" |
-				psc?.identification?.country_registered == "Uk" |
-				psc?.identification?.country_registered == "United Kingdom"
+				psc?.identification?.place_registered?.toUpperCase() == "United Kingdom"?.toUpperCase() |
+				psc?.identification?.country_registered?.toUpperCase() == "England And Wales"?.toUpperCase() |
+				psc?.identification?.country_registered?.toUpperCase() == "England"?.toUpperCase() |
+				psc?.identification?.country_registered?.toUpperCase() == "Wales"?.toUpperCase() |
+				psc?.identification?.country_registered?.toUpperCase() == "Scotland"?.toUpperCase() |
+				psc?.identification?.country_registered?.toUpperCase() == "Uk"?.toUpperCase() |
+				psc?.identification?.country_registered?.toUpperCase() == "United Kingdom"?.toUpperCase()
 				){
 				var office_company_id = fix_company_id(psc.identification.registration_number);
 				add_company_to_cy_from_id(office_company_id).done(
