@@ -33,7 +33,7 @@ $(function(){
 
 
 		    {
-		    	selector: "node[marked_as_important]",
+		    	selector: "node[?marked_as_important]",
 		    	style: {
 		    		'border-width' : 3,
 		    		'border-color' : 'red'
@@ -155,6 +155,19 @@ $(function(){
 			$("#add_address").prop('disabled', false);
 		}
 
+	})
+
+	cy.on('add', 'node', function(evt){
+		evt.target.data('needs_layout', true);
+		cy.$('node').lock();
+		cy.$('node[?needs_layout]').unlock();
+		cy.$('node').layout({name:'cose', nodeRepulsion: 8000, nodeDimensionsIncludeLabels:true, animate:false}).on('layoutstop',
+			function(){
+				console.log('here')
+				evt.target.data('needs_layout', false);
+				cy.$('node').unlock();
+			}
+		).run()
 	})
 
 })

@@ -4,7 +4,7 @@ var prettify_company_name = function(company_name){
 }
 
 var fix_company_id = function(company_id){
-	return(company_id.padStart(8, '0'))
+	return(company_id.padStart(8, '0').toUpperCase())
 }
 
 
